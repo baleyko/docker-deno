@@ -1,0 +1,13 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag deno:latest
+    - name: Run the built Docker image
+      run: echo 'console.log("Hello World!")' | docker run -i --rm deno:latest | grep 'Hello World!' || false
