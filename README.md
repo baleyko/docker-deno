@@ -1,6 +1,9 @@
 # Deno - A secure runtime for JavaScript and TypeScript
 
 [![GitHub Releases](https://img.shields.io/github/release/baleyko/docker-deno.svg)](https://github.com/baleyko/docker-deno/releases)
+[![Docker Hub Image Size](https://img.shields.io/docker/image-size/baleyko/deno/latest.svg)](https://microbadger.com/images/baleyko/deno)
+[![Docker Hub Image Layers](https://images.microbadger.com/badges/image/baleyko/deno.svg)](https://microbadger.com/images/baleyko/deno)
+[![Docker Pulls](https://img.shields.io/docker/pulls/baleyko/deno.svg)](https://hub.docker.com/r/baleyko/deno/)
 [![The Unlicense](https://img.shields.io/badge/license-Unlicense-orange.svg)](https://unlicense.org)
 
 These are sources files used to build [Docker](https://www.docker.com/) image with [Deno](https://deno.land/) inside. Make a code, make a run, make a decision!
