@@ -12,4 +12,6 @@ RUN apt update -yqq \
   && apt -yqq autoremove \
   && apt clean \
   && rm -rf /var/lib/apt/lists/*
-ENTRYPOINT ["/usr/local/bin/deno"]
+ADD . .
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["deno"]
