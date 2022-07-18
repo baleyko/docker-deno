@@ -1,13 +1,28 @@
 name: Build
 
-on: [push]
-
+on:
+  push:
+    branches: [master]
+  # schedule:
+  #   - cron: '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Login to Docker Hub
+      env:
+        DOCKER_HUB_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
+        DOCKER_HUB_ACCESS_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+      run: |
+        docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag deno:latest
+      run: docker build . --file Dockerfile --tag baleyko/deno:latest
     - name: Run the built Docker image
-      run: echo 'console.log("Hello World!")' | docker run -i --rm deno:latest | grep 'Hello World!' || false
+      run: echo 'console.log("Hello World!")' | docker run -i --rm baleyko/deno:latest | grep 'Hello World!' || false
+    - name: Retag and publish the build Docker image
+      run: |
+        version=$(docker run -i --rm baleyko/deno:latest deno eval 'console.log(String(Deno.version.deno));')
+        docker tag baleyko/deno:latest baleyko/deno:$version
+        docker push baleyko/deno:latest
+        docker push baleyko/deno:$version
