@@ -1,4 +1,5 @@
 FROM ubuntu:focal
+ENV PATH "/root/.deno/bin:${PATH}"
 WORKDIR /
 RUN apt update -yqq \
   && apt install -yqq \
